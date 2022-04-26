@@ -3,15 +3,22 @@ import { connect } from 'react-redux';
 import './App.css';
 import GifList from './Giflist';
 import GifForm from './GifForm';
+import { useEffect } from 'react';
+import {getGifs} from './actions/actions';
 
-const URL = 'api.giphy.com/v1/gifs/search'
+
 const API_KEY = 'OAQE11VhEnuLYRJDohKcQWosV6NG2cNh'
 
 function App(props) {
   // const gifs = data;
   // const loading = false;
   // const error = '';
-  const {error, loading} = props;
+  const {error, loading, getGifs} = props;
+
+  useEffect(() => {
+    props.getGifs('snap');
+    // props.fetchStart();
+  }, [])
   
 
   return (
@@ -38,4 +45,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, {getGifs})(App);
